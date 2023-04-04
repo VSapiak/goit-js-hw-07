@@ -32,17 +32,18 @@ galleryItem.addEventListener("click", (e) => {
   const galleryAltText = e.target.alt;
 
   const instance = basicLightbox.create(`
-    <img src="${galleryImageSrc}" alt="${galleryAltText}" width="800" height="600">
+    <img src="${galleryImageSrc}" alt="${galleryAltText}" width="800" height="600">,
 `);
 
   instance.show();
 
-  document.addEventListener("keydown", (e) => {
+  const escapePress = (e) => {
     if (e.key === "Escape") {
       instance.close();
+      document.removeEventListener("keydown", escapePress);
     }
-    return instance;
-  });
+  };
+  document.addEventListener("keydown", escapePress);
 });
 
 console.log(galleryItems);

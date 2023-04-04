@@ -21,18 +21,19 @@ galleryItem.addEventListener("click", (e) => {
     return;
   }
 
-  let gallery = new SimpleLightbox(".gallery a", {
-    captionsData: "alt",
-    captionsPosition: "bottom",
-    captionDelay: 250,
-  });
-
-  document.addEventListener("keydown", (e) => {
+  const escapePress = (e) => {
     if (e.key === "Escape") {
       gallery.close();
+      document.removeEventListener("keydown", escapePress);
     }
-    return gallery;
-  });
+  };
+  document.addEventListener("keydown", escapePress);
+});
+
+let gallery = new SimpleLightbox(".gallery a", {
+  captionsData: "alt",
+  captionsPosition: "bottom",
+  captionDelay: 250,
 });
 
 console.log(galleryItems);
